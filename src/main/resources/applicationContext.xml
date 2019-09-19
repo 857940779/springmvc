@@ -9,4 +9,17 @@
 
     <!-- 开启使用注解-->
     <context:component-scan base-package="com.springmvc"/>
+
+    <bean id="propertyConfigurer" class="com.springmvc.common.MyPlaceHolder">
+        <constructor-arg name="url" value="http://127.0.0.1:8080/server/app/property"/>
+        <constructor-arg name="environment" value="DEV"/>
+        <constructor-arg name="serviceName" value="DataService"/>
+    </bean>
+
+    <!--测试引入数据库，mq等等，会不会覆盖之前引入的xml里面的bean-->
+
+    <!--数据库配置-->
+    <import resource="database.xml"/>
+    <!--mq配置-->
+    <import resource="mq.xml"/>
 </beans>

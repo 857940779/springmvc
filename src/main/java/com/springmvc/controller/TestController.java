@@ -1,6 +1,8 @@
 package com.springmvc.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.springmvc.dao.TestDOMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +21,9 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/controller")
 public class TestController {
+
+    @Autowired
+    private TestDOMapper testDOMapper;
 
     //默认返回到test.jsp页面
     @RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -61,6 +66,7 @@ public class TestController {
         Map map=new HashMap<>();
         map.put("userId","1");
         map.put("userName","zhangsan");
+        map.put("test",testDOMapper.selectByPrimaryKey(1));
         return JSON.toJSONString(map);
     }
 }
