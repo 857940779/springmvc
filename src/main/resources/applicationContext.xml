@@ -10,16 +10,20 @@
     <!-- 开启使用注解-->
     <context:component-scan base-package="com.springmvc"/>
 
-    <bean id="propertyConfigurer" class="com.springmvc.common.MyPlaceHolder">
+    <bean id="propertyConfigurer" class="com.configclient.common.MyPlaceHolder">
         <constructor-arg name="url" value="http://127.0.0.1:8080/server/app/property"/>
         <constructor-arg name="environment" value="DEV"/>
         <constructor-arg name="serviceName" value="DataService"/>
     </bean>
 
-    <!--测试引入数据库，mq等等，会不会覆盖之前引入的xml里面的bean-->
+    <!--需要手动引入client的xml，否则无法加载它的bean，mq配置等等-->
+    <import resource="classpath*:configCenterContext.xml"/>
+
+    <!--这里的bean不要有与client中的同名，否则会被覆盖，或者有冲突说多个bean-->
 
     <!--数据库配置-->
     <import resource="database.xml"/>
     <!--mq配置-->
-    <import resource="mq.xml"/>
+    <!--<import resource="mq.xml"/>-->
+
 </beans>
